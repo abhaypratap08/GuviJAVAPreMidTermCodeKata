@@ -1,0 +1,36 @@
+import java.util.*;
+
+class Item {
+    static double totalDiscount = 0;
+
+    public Item(double price, double discountPercent) {
+        double discountAmount = price * discountPercent / 100;
+        totalDiscount += discountAmount;
+    }
+
+    public static double getTotalDiscount() {
+        return totalDiscount;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        List<String> lines = new ArrayList<>();
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine().trim();
+            if (line.isEmpty()) break;
+            lines.add(line);
+        }
+
+        for (String line : lines) {
+            String[] parts = line.split("\\s+");
+            double price = Double.parseDouble(parts[0]);
+            double discountPercent = Double.parseDouble(parts[1]);
+            new Item(price, discountPercent);
+        }
+
+        System.out.println("Total Discount: " + (int)Item.getTotalDiscount());
+    }
+}
