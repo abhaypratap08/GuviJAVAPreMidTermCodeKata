@@ -1,0 +1,33 @@
+import java.util.Scanner;
+abstract class Vehicle {
+    abstract double fuelEfficiency(double distance, double fuel);
+}
+class Car extends Vehicle {
+    @Override
+    double fuelEfficiency(double distance, double fuel) {
+        return distance / fuel;
+    }
+}
+class Truck extends Vehicle {
+    @Override
+    double fuelEfficiency(double distance, double fuel) {
+        return (distance * 0.8) / fuel;
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String vehicleType = sc.next();
+        double distance = sc.nextDouble();
+        double fuel = sc.nextDouble();        
+        Vehicle vehicle;
+        if (vehicleType.equals("Car")) {
+            vehicle = new Car();
+        } else {
+            vehicle = new Truck();
+        }
+        
+        System.out.println("Fuel Efficiency: " + vehicle.fuelEfficiency(distance, fuel));
+        sc.close();
+    }
+}
