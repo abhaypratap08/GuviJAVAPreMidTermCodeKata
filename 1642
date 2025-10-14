@@ -12,8 +12,8 @@ class Volume {
     }
 
     // Cylinder
-    public double findVolume(float radius, float height) {
-        return 3.14 * radius * radius * height;
+    public double findVolume(double radius, double height) {
+        return Math.PI * radius * radius * height;
     }
 }
 
@@ -39,12 +39,17 @@ public class Main {
                 break;
 
             case "cylinder":
-                float r = sc.nextFloat();
-                float ht = sc.nextFloat();
+                double r = sc.nextDouble();
+                double ht = sc.nextDouble();
                 volume = v.findVolume(r, ht);
                 break;
+
+            default:
+                System.out.println("Invalid shape");
+                return;
         }
 
+        // Print volume rounded to 2 decimal places
         System.out.printf("%.2f", volume);
     }
 }
