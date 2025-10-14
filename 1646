@@ -1,0 +1,36 @@
+import java.util.*;
+
+class Person {
+    private String name;
+    private int age;
+
+    // Constructor to initialize name and age
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Method to add years to age
+    public void addYears(int years) {
+        this.age += years;
+    }
+
+    public int getAge() {
+        return age;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String name = sc.nextLine();
+        int age = sc.nextInt();
+        int yearsToAdd = sc.nextInt();
+
+        Person person = new Person(name, age);
+        person.addYears(yearsToAdd);
+
+        System.out.println(person.getAge());
+    }
+}
