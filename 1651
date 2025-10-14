@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+abstract class Shape {
+    abstract int perimeter();
+}
+
+class Triangle extends Shape {
+    int side1, side2, side3;
+
+    Triangle(int s1, int s2, int s3) {
+        side1 = s1;
+        side2 = s2;
+        side3 = s3;
+    }
+
+    @Override
+    int perimeter() {
+        return side1 + side2 + side3;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner obj = new Scanner(System.in);
+
+        String shapeType = obj.next();
+        int s1 = obj.nextInt();
+        int s2 = obj.nextInt();
+        int s3 = obj.nextInt();
+
+        if (shapeType.equalsIgnoreCase("triangle")) {
+            Shape triangle = new Triangle(s1, s2, s3);
+            System.out.println("Perimeter: " + triangle.perimeter());
+        }
+
+        obj.close();
+    }
+}
