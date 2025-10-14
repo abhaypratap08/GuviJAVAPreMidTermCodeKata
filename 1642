@@ -1,0 +1,42 @@
+1642. Polymorphism, Method Overloading - Volume Finder
+
+Geekoin50
+Medium
+Volume Finder
+
+
+Problem Statement:
+Write a program using method overloading
+
+
+Description:
+Find the volume of:
+
+
+1. Cube (side)
+
+
+2. Cuboid (length, breadth, height)
+
+
+3. Cylinder (radius, height)
+
+
+Input Format:
+User chooses shape and provides dimensions.
+
+
+Output Format:
+Volume of the chosen shape.
+
+
+Sample Input:
+cylinder
+3 7
+
+
+Sample Output:
+
+
+197.92
+
