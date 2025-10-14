@@ -1,0 +1,58 @@
+import java.util.*;
+
+class LibraryItem {
+    protected int lateDays;
+
+    public LibraryItem(int lateDays) {
+        this.lateDays = lateDays;
+    }
+
+    // Method to calculate late fee (to be overridden)
+    public int calculateLateFee() {
+        return 0;
+    }
+}
+
+class Book extends LibraryItem {
+    public Book(int lateDays) {
+        super(lateDays);
+    }
+
+    @Override
+    public int calculateLateFee() {
+        return lateDays * 5; // ₹5 per day
+    }
+}
+
+class Magazine extends LibraryItem {
+    public Magazine(int lateDays) {
+        super(lateDays);
+    }
+
+    @Override
+    public int calculateLateFee() {
+        return lateDays * 2; // ₹2 per day
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String type = sc.nextLine().trim().toLowerCase();
+        int lateDays = sc.nextInt();
+
+        LibraryItem item;
+
+        if (type.equals("book")) {
+            item = new Book(lateDays);
+        } else if (type.equals("magazine")) {
+            item = new Magazine(lateDays);
+        } else {
+            System.out.println("Invalid item type");
+            return;
+        }
+
+        System.out.println(item.calculateLateFee());
+    }
+}
