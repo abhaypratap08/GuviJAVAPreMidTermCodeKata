@@ -1,0 +1,41 @@
+import java.util.*;
+
+class Product {
+    protected double price;
+    protected double discount;
+
+    public Product(double price, double discount) {
+        this.price = price;
+        this.discount = discount;
+    }
+
+    public double getAppliedDiscount() {
+        return discount;
+    }
+}
+
+class SpecialProduct extends Product {
+    private final double maxDiscount = 500; // final variable
+
+    public SpecialProduct(double price, double discount) {
+        super(price, discount);
+    }
+
+    @Override
+    public double getAppliedDiscount() {
+        return Math.min(discount, maxDiscount);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        double price = sc.nextDouble();
+        double discount = sc.nextDouble();
+
+        SpecialProduct sp = new SpecialProduct(price, discount);
+
+        System.out.println("Applied Discount: " + (int)sp.getAppliedDiscount());
+    }
+}
