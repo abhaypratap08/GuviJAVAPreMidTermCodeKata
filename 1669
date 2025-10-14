@@ -1,0 +1,68 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class GenericStack<T> {
+    private ArrayList<T> stack;
+
+    public GenericStack() {
+        stack = new ArrayList<>();
+    }
+
+    public void push(T item) {
+        stack.add(item);
+        System.out.println("Pushed: " + item);
+    }
+
+    public void pop() {
+        if (stack.isEmpty()) {
+            System.out.println("Stack is empty");
+        } else {
+            T item = stack.remove(stack.size() - 1);
+            System.out.println("Popped: " + item);
+        }
+    }
+
+    public void peek() {
+        if (stack.isEmpty()) {
+            System.out.println("Stack is empty");
+        } else {
+            T item = stack.get(stack.size() - 1);
+            System.out.println("Peek: " + item);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.nextLine(); // consume newline
+
+        GenericStack<String> stack = new GenericStack<>();
+
+        for (int i = 0; i < n; i++) {
+            String line = sc.nextLine();
+            String[] parts = line.split(" ", 2);
+            String command = parts[0];
+
+            switch (command) {
+                case "push":
+                    if (parts.length < 2) {
+                        System.out.println("Invalid push command");
+                    } else {
+                        stack.push(parts[1]);
+                    }
+                    break;
+                case "pop":
+                    stack.pop();
+                    break;
+                case "peek":
+                    stack.peek();
+                    break;
+                default:
+                    System.out.println("Unknown command: " + command);
+            }
+        }
+        sc.close();
+    }
+}
