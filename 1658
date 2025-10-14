@@ -1,0 +1,61 @@
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
+
+interface BookOperations {
+    void addBook(String book);
+}
+
+interface UserOperations {
+    void borrowBook(String book);
+}
+
+class Library implements BookOperations, UserOperations {
+    // Using a Set to store available books for quick checking and to prevent duplicates
+    private Set<String> availableBooks;
+
+    public Library() {
+        this.availableBooks = new HashSet<>();
+    }
+
+    @Override
+    public void addBook(String book) {
+        availableBooks.add(book);
+        System.out.println("Book added: " + book);
+    }
+
+    @Override
+    public void borrowBook(String book) {
+        if (availableBooks.contains(book)) {
+            availableBooks.remove(book);
+            System.out.println("Book borrowed: " + book);
+        } else {
+            System.out.println("Book not available");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Library library = new Library();
+
+        // 1. Read book name to add (First line of input)
+        String bookToAdd = sc.nextLine().trim();
+        library.addBook(bookToAdd);
+
+        // 2. Read the command for borrowing (Second line of input)
+        String borrowCommand = sc.nextLine().trim();
+
+        // Check if the command starts with "borrow "
+        if (borrowCommand.toLowerCase().startsWith("borrow ")) {
+            // Extract the book name by removing "borrow "
+            String bookToBorrow = borrowCommand.substring("borrow ".length()).trim();
+            library.borrowBook(bookToBorrow);
+        } else {
+            // Handle unexpected command format if necessary, though usually not required by these problems
+        }
+
+        sc.close();
+    }
+}
