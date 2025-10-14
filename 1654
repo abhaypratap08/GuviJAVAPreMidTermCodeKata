@@ -1,0 +1,85 @@
+import java.util.Scanner;
+
+abstract class Ticket {
+    protected int distance;
+
+    public Ticket(int distance) {
+        this.distance = distance;
+    }
+
+    abstract double calculateFare();
+}
+
+class BusTicket extends Ticket {
+    private static final int FARE_PER_KM = 5;
+
+    public BusTicket(int distance) {
+        super(distance);
+    }
+
+    @Override
+    double calculateFare() {
+        return distance * FARE_PER_KM;
+    }
+}
+
+class TrainTicket extends Ticket {
+    private static final int FARE_PER_KM = 8;
+
+    public TrainTicket(int distance) {
+        super(distance);
+    }
+
+    @Override
+    double calculateFare() {
+        return distance * FARE_PER_KM;
+    }
+}
+
+class FlightTicket extends Ticket {
+    private static final int FARE_PER_KM = 15;
+
+    public FlightTicket(int distance) {
+        super(distance);
+    }
+
+    @Override
+    double calculateFare() {
+        return distance * FARE_PER_KM;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String ticketType = sc.next().toLowerCase();
+        int distance = sc.nextInt();
+
+        Ticket ticket = null;
+        String displayType = "";
+
+        if (ticketType.equals("bus")) {
+            ticket = new BusTicket(distance);
+            displayType = "Bus Ticket";
+        } else if (ticketType.equals("train")) {
+            ticket = new TrainTicket(distance);
+            displayType = "Train Ticket";
+        } else if (ticketType.equals("flight")) {
+            ticket = new FlightTicket(distance);
+            displayType = "Flight Ticket";
+        } else {
+            System.out.println("Invalid ticket type entered.");
+            sc.close();
+            return;
+        }
+
+        double finalFare = ticket.calculateFare();
+
+        System.out.println("Ticket Type: " + displayType);
+        // Fare can be an integer, but using double for consistency and flexibility
+        System.out.println("Fare: " + (int)finalFare); 
+
+        sc.close();
+    }
+}
