@@ -1,42 +1,50 @@
-1642. Polymorphism, Method Overloading - Volume Finder
+import java.util.*;
 
-Geekoin50
-Medium
-Volume Finder
+class Volume {
+    // Cube
+    public double findVolume(double side) {
+        return side * side * side;
+    }
 
+    // Cuboid
+    public double findVolume(double length, double breadth, double height) {
+        return length * breadth * height;
+    }
 
-Problem Statement:
-Write a program using method overloading
+    // Cylinder
+    public double findVolume(float radius, float height) {
+        return 3.14 * radius * radius * height;
+    }
+}
 
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String shape = sc.nextLine().trim().toLowerCase();
+        Volume v = new Volume();
 
-Description:
-Find the volume of:
+        double volume = 0.0;
 
+        switch (shape) {
+            case "cube":
+                double side = sc.nextDouble();
+                volume = v.findVolume(side);
+                break;
 
-1. Cube (side)
+            case "cuboid":
+                double l = sc.nextDouble();
+                double b = sc.nextDouble();
+                double h = sc.nextDouble();
+                volume = v.findVolume(l, b, h);
+                break;
 
+            case "cylinder":
+                float r = sc.nextFloat();
+                float ht = sc.nextFloat();
+                volume = v.findVolume(r, ht);
+                break;
+        }
 
-2. Cuboid (length, breadth, height)
-
-
-3. Cylinder (radius, height)
-
-
-Input Format:
-User chooses shape and provides dimensions.
-
-
-Output Format:
-Volume of the chosen shape.
-
-
-Sample Input:
-cylinder
-3 7
-
-
-Sample Output:
-
-
-197.92
-
+        System.out.printf("%.2f", volume);
+    }
+}
