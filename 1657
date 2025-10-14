@@ -1,0 +1,58 @@
+import java.util.Scanner;
+
+interface Marks {
+    void enterMarks(int marks);
+}
+
+interface Attendance {
+    void enterAttendance(int attendance);
+}
+
+class Student implements Marks, Attendance {
+    private int studentMarks;
+    private int studentAttendance;
+
+    @Override
+    public void enterMarks(int marks) {
+        this.studentMarks = marks;
+    }
+
+    @Override
+    public void enterAttendance(int attendance) {
+        this.studentAttendance = attendance;
+    }
+
+    public void checkResult() {
+        final int MIN_MARKS = 40;
+        final int MIN_ATTENDANCE = 75;
+
+        boolean passedMarks = this.studentMarks >= MIN_MARKS;
+        boolean passedAttendance = this.studentAttendance >= MIN_ATTENDANCE;
+
+        if (passedMarks && passedAttendance) {
+            System.out.println("Result: Pass");
+        } else {
+            System.out.println("Result: Fail");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Student student = new Student();
+
+        // Read Marks
+        int marks = sc.nextInt();
+        student.enterMarks(marks);
+
+        // Read Attendance
+        int attendance = sc.nextInt();
+        student.enterAttendance(attendance);
+
+        // Check and print the result
+        student.checkResult();
+
+        sc.close();
+    }
+}
