@@ -1,0 +1,60 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+interface AddToCart {
+    void addItem(String item);
+}
+
+interface Payment {
+    void makePayment();
+}
+
+class ShoppingCart implements AddToCart, Payment {
+    private List<String> items;
+
+    public ShoppingCart() {
+        this.items = new ArrayList<>();
+    }
+
+    @Override
+    public void addItem(String item) {
+        items.add(item);
+        System.out.println("Item added: " + item);
+    }
+
+    @Override
+    public void makePayment() {
+        int itemCount = items.size();
+        System.out.println("Payment successful for " + itemCount + " items.");
+        // Clear the cart after payment (optional, but good practice)
+        items.clear();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ShoppingCart cart = new ShoppingCart();
+
+        // Read the first command
+        String command = sc.next();
+
+        if (command.equalsIgnoreCase("add")) {
+            // Read the rest of the line as the item name
+            String item = sc.nextLine().trim();
+            if (!item.isEmpty()) {
+                cart.addItem(item);
+            }
+        }
+        
+        // Read the second command (which should be "pay")
+        String command2 = sc.next();
+        
+        if (command2.equalsIgnoreCase("pay")) {
+            cart.makePayment();
+        }
+
+        sc.close();
+    }
+}
