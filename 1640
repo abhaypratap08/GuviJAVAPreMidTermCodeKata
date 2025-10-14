@@ -1,0 +1,42 @@
+import java.util.*;
+
+class BankAccount {
+    private double balance;
+
+    public BankAccount(double initialBalance) {
+        this.balance = initialBalance;
+    }
+
+    public void deposit(int amount) {
+        balance += amount;
+    }
+
+    public void deposit(double amount) {
+        balance += amount;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        double initialBalance = sc.nextDouble();
+        int n = sc.nextInt();
+
+        BankAccount account = new BankAccount(initialBalance);
+
+        for (int i = 0; i < n; i++) {
+            String value = sc.next();
+            if (value.contains(".")) {
+                account.deposit(Double.parseDouble(value));
+            } else {
+                account.deposit(Integer.parseInt(value));
+            }
+        }
+
+        System.out.println("Total Balance: " + (int)account.getBalance());
+    }
+}
