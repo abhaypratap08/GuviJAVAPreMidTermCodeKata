@@ -1,0 +1,95 @@
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
+
+public class Main {
+
+    // Generic MaxFinder class
+    static class MaxFinder<T extends Comparable<T>> {
+        public T findMax(List<T> list) {
+            if (list == null || list.isEmpty()) {
+                return null; // or throw exception
+            }
+            T max = list.get(0);
+            for (T element : list) {
+                if (element.compareTo(max) > 0) {
+                    max = element;
+                }
+            }
+            return max;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        sc.nextLine(); // consume newline
+
+        // Read the entire line of inputs as strings
+        String line = sc.nextLine();
+        String[] inputs = line.split(" ");
+
+        // Try to detect input type (int, double, or string)
+        // For simplicity, if all tokens parse as integer -> Integer list
+        // else if all parse as double -> Double list
+        // else String list
+
+        boolean allInt = true;
+        boolean allDouble = true;
+
+        for (String s : inputs) {
+            if (!isInteger(s)) allInt = false;
+            if (!isDouble(s)) allDouble = false;
+        }
+
+        if (allInt) {
+            List<Integer> list = new ArrayList<>();
+            for (String s : inputs) {
+                list.add(Integer.parseInt(s));
+            }
+            MaxFinder<Integer> maxFinder = new MaxFinder<>();
+            Integer max = maxFinder.findMax(list);
+            System.out.println("Maximum: " + max);
+
+        } else if (allDouble) {
+            List<Double> list = new ArrayList<>();
+            for (String s : inputs) {
+                list.add(Double.parseDouble(s));
+            }
+            MaxFinder<Double> maxFinder = new MaxFinder<>();
+            Double max = maxFinder.findMax(list);
+            System.out.println("Maximum: " + max);
+
+        } else {
+            // Treat as strings
+            List<String> list = new ArrayList<>();
+            for (String s : inputs) {
+                list.add(s);
+            }
+            MaxFinder<String> maxFinder = new MaxFinder<>();
+            String max = maxFinder.findMax(list);
+            System.out.println("Maximum: " + max);
+        }
+
+        sc.close();
+    }
+
+    private static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private static boolean isDouble(String s) {
+        try {
+            Double.parseDouble(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+}
