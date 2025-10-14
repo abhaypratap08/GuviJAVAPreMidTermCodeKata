@@ -1,0 +1,79 @@
+import java.util.*;
+
+public class Main {
+
+    // Generic method to sort a list
+    public static <T extends Comparable<T>> void sortList(List<T> list) {
+        Collections.sort(list);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        sc.nextLine(); // consume newline
+
+        String line = sc.nextLine();
+        String[] inputs = line.split(" ");
+
+        // Detect input type: int, double, or string (like before)
+        boolean allInt = true;
+        boolean allDouble = true;
+
+        for (String s : inputs) {
+            if (!isInteger(s)) allInt = false;
+            if (!isDouble(s)) allDouble = false;
+        }
+
+        if (allInt) {
+            List<Integer> list = new ArrayList<>();
+            for (String s : inputs) {
+                list.add(Integer.parseInt(s));
+            }
+            sortList(list);
+            printList(list);
+
+        } else if (allDouble) {
+            List<Double> list = new ArrayList<>();
+            for (String s : inputs) {
+                list.add(Double.parseDouble(s));
+            }
+            sortList(list);
+            printList(list);
+
+        } else {
+            List<String> list = new ArrayList<>();
+            Collections.addAll(list, inputs);
+            sortList(list);
+            printList(list);
+        }
+
+        sc.close();
+    }
+
+    private static void printList(List<?> list) {
+        for (int i = 0; i < list.size(); i++) {
+            System.out.print(list.get(i));
+            if (i < list.size() - 1) System.out.print(" ");
+        }
+        System.out.println();
+    }
+
+    private static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private static boolean isDouble(String s) {
+        try {
+            Double.parseDouble(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+}
