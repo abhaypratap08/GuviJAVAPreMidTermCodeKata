@@ -1,0 +1,56 @@
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Main {
+
+    public static <T> void countFrequency(List<T> list) {
+        // Use a HashMap to store the element and its count
+        Map<T, Integer> frequencyMap = new HashMap<>();
+
+        for (T element : list) {
+            // Get the current count for the element, or 0 if it's the first time
+            Integer count = frequencyMap.getOrDefault(element, 0);
+            
+            // Increment the count and put it back into the map
+            frequencyMap.put(element, count + 1);
+
+            // Alternatively, using the merge function (Java 8+):
+            // frequencyMap.merge(element, 1, Integer::sum);
+        }
+
+        // Print the frequency map in the required format
+        for (Map.Entry<T, Integer> entry : frequencyMap.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        // Read the number of elements
+        int n = sc.nextInt();
+        
+        // Consume the rest of the line, which is necessary before reading the next line
+        sc.nextLine(); 
+        
+        // Read the space-separated elements as a single string
+        String line = sc.nextLine();
+        
+        // Split the string into an array of strings
+        String[] elements = line.split("\\s+");
+
+        // Use a List of Strings to represent the generic input, 
+        // as the input elements can be anything (Strings in the sample)
+        List<String> inputList = new ArrayList<>(Arrays.asList(elements));
+
+        // Call the generic method
+        // Note: The method is generic <T>, and we call it with List<String>
+        countFrequency(inputList);
+
+        sc.close();
+    }
+}
