@@ -1,0 +1,53 @@
+import java.util.*;
+
+class Employee {
+    public double calculateSalary(double baseSalary) {
+        return baseSalary;
+    }
+
+    public double calculateSalary(double baseSalary, double bonus) {
+        return baseSalary + bonus;
+    }
+
+    public double calculateSalary(double baseSalary, double bonus, double deductions) {
+        return baseSalary + bonus - deductions;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        List<String> inputs = new ArrayList<>();
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine().trim();
+            if (line.isEmpty()) break;
+            inputs.add(line);
+        }
+
+        Employee emp = new Employee();
+        double result = 0;
+
+        if (inputs.size() == 1) {
+            double base = Double.parseDouble(inputs.get(0));
+            result = emp.calculateSalary(base);
+        } 
+        else if (inputs.size() == 2) {
+            double base = Double.parseDouble(inputs.get(0));
+            double bonus = Double.parseDouble(inputs.get(1));
+            result = emp.calculateSalary(base, bonus);
+        } 
+        else if (inputs.size() == 3) {
+            double base = Double.parseDouble(inputs.get(0));
+            double bonus = Double.parseDouble(inputs.get(1));
+            double deductions = Double.parseDouble(inputs.get(2));
+            result = emp.calculateSalary(base, bonus, deductions);
+        }
+
+        // Print result cleanly (no extra decimals if not needed)
+        if (result == (int) result) {
+            System.out.println((int) result);
+        } else {
+            System.out.println(result);
+        }
+    }
+}
